@@ -1,4 +1,4 @@
 package com.pluralsight.models;
 
-public class Drinks {
+public class Drink {
 }

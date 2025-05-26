@@ -12,7 +12,7 @@ public class Order {
     private String orderNumber;
     private LocalDateTime orderDateTime;
     private List<Sandwich> sandwiches;
-    private List<Drinks> drinks;
+    private List<Drink> drinks;
     private List<Chips> chips;
 
     // Declaring these separately and static because they should just be used class wide not based on individual objects
@@ -31,14 +31,14 @@ public class Order {
 
     // Methods to add foods to their lists/cart
     public void addSandwich(Sandwich sandwich) { sandwiches.add(sandwich); }
-    public void addDrink(Drinks drink) { drinks.add(drink); }
+    public void addDrink(Drink drink) { drinks.add(drink); }
     public void addChips(Chips chips) { this.chips.add(chips); }
 
     // Method to calculate the subtotal price. Uses the stream method on each type of food list that acquires the price
     // of each one and adds them together.
     public double getSubTotalPrice() {
         return sandwiches.stream().mapToDouble(Sandwich::getPrice).sum()
-                + drinks.stream().mapToDouble(Drinks::getPrice).sum()
+                + drinks.stream().mapToDouble(Drink::getPrice).sum()
                 + chips.stream().mapToDouble(Chips::getPrice).sum();
     }
 
@@ -94,10 +94,10 @@ public class Order {
 //        return sandwiches.isEmpty() && drinks.isEmpty() && chips.isEmpty();
 //    }
 
-    // Standard getters for the declared variable
+    // Standard getters for the declared variables
     public String getOrderNumber() { return orderNumber; }
     public LocalDateTime getOrderDateTime() { return orderDateTime; }
     public List<Sandwich> getSandwiches() { return sandwiches; }
-    public List<Drinks> getDrinks() { return drinks; }
+    public List<Drink> getDrinks() { return drinks; }
     public List<Chips> getChips() { return chips; }
 }
