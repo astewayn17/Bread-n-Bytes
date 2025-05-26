@@ -81,18 +81,18 @@ public class Order {
         return sb.toString();
     }
 
-    // Method to remove the items from the list/cart
-//    public void clear() {
-//        sandwiches.clear();
-//        drinks.clear();
-//        chips.clear();
-//        orderDateTime = LocalDateTime.now();
-//    }
+    // Method to remove the items from the list/cart and clear the order
+    public void cancel() {
+        sandwiches.clear();
+        drinks.clear();
+        chips.clear();
+        orderDateTime = LocalDateTime.now();
+    }
 
-    // Used to check if the order has anything in the lists/cart
-//    public boolean isEmpty() {
-//        return sandwiches.isEmpty() && drinks.isEmpty() && chips.isEmpty();
-//    }
+    // Used to check if the order has anything in the lists/cart. True if all are empty
+    public boolean isEmpty() {
+        return sandwiches.isEmpty() && drinks.isEmpty() && chips.isEmpty();
+    }
 
     // Standard getters for the declared variables
     public String getOrderNumber() { return orderNumber; }
