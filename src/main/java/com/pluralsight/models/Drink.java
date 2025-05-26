@@ -26,7 +26,7 @@ public class Drink {
 
     // Shows a simple summary that the order class uses to show it to the user
     public String getSummary() {
-        return String.format("%s %s - $%.2f", size, flavor, price);
+        return String.format("%s %s - $%.2f", this.size, this.flavor, this.price);
     }
 
     // Basic getters

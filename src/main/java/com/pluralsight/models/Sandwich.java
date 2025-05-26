@@ -96,11 +96,11 @@ public class Sandwich {
     // Returns a sub summary of the sandwich used in the main order to show the user
     public String getSummary() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%d\" %s Sandwich", size, breadType));
+        sb.append(String.format("%d\" %s Sandwich", this.size, this.breadType));
         if (isToasted) {
             sb.append(" (Toasted)");
         }
-        sb.append(String.format(" - $%.2f", getPrice()));
+        sb.append(String.format(" - $%.2f", getMeatNCheesePrice()));
         // If there are any meats in the list, it will append the information and stream through the meat list and get
         // the name and use an internal ternary to write if the meat is extra or not and then it collects the strings
         // neatly displays them together. Same thing for the cheese and regular toppings.
