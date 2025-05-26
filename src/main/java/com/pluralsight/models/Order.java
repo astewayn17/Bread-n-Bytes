@@ -73,7 +73,7 @@ public class Order {
         }
         // Displays the formatted info for the totals and tax and returns all the info using the toString method
         sb.append("\n\n").append("=".repeat(30)).append("\n");
-        sb.append(String.format("SUB TOTAL: $%.2f\n", getSubTotalPrice()));
+        sb.append(String.format("SUBTOTAL: $%.2f\n", getSubTotalPrice()));
         sb.append(String.format("TAXABLE: $%.2f\n", getSubTotalPrice()));
         sb.append(String.format("TAX: $%.2f\n", taxRate * getSubTotalPrice()));
         sb.append(String.format("TOTAL: $%.2f\n", getTotalPrice()));
@@ -100,4 +100,5 @@ public class Order {
     public List<Sandwich> getSandwiches() { return sandwiches; }
     public List<Drink> getDrinks() { return drinks; }
     public List<Chips> getChips() { return chips; }
+    public static double getTaxRate() { return taxRate; }
 }
