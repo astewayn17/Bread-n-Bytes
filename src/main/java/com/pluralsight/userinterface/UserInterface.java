@@ -152,8 +152,8 @@ public class UserInterface {
     private List<Topping> whatMeats() {
         List<Topping> meats = new ArrayList<>();
         System.out.println("\n=== Add Meats ===");
-        System.out.println("Available meats: \nSteak \nHam Salami \nRoast Beef \nChicken \nBacon");
-        System.out.println("Type the meat name or 'done' to continue:");
+        System.out.println("\nAvailable meat:\nSteak\nHam Salami\nRoast Beef\nChicken\nBacon");
+        System.out.println("\nType the meat name or 'done' to finish.");
         //
         while (true) {
             System.out.print("Add meat: ");
@@ -172,4 +172,78 @@ public class UserInterface {
         }
         return meats;
     }
+
+    //
+    private List<Topping> whatCheeses() {
+        List<Topping> cheeses = new ArrayList<>();
+        System.out.println("\n=== Add Cheeses ===");
+        System.out.println("\nAvailable cheese:\nAmerican\nProvolone\nRoast Beef\nCheddar\nSwiss");
+        System.out.println("\nType the cheese name or 'done' to finish.");
+        //
+        while (true) {
+            System.out.print("Add cheese: ");
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("done")) break;
+            Topping cheese = getCheeseName(input);
+            if (cheese != null) {
+                System.out.print("Is this extra cheese? (yes/no): ");
+                String extraInput = scanner.nextLine().trim().toLowerCase();
+                boolean isExtra = extraInput.equals("yes") || extraInput.equals("y");
+                cheeses.add(Topping.getInstance(cheese, isExtra));
+                System.out.println(cheese.getName() + " added" + (isExtra ? " (Extra)" : ""));
+            } else {
+                System.out.println("Invalid input! Please try again.");
+            }
+        }
+        return cheeses;
+    }
+
+    //
+    private List<Topping> whatRegularToppings() {
+        List<Topping> toppings = new ArrayList<>();
+        System.out.println("\n=== Add Regular Toppings ===");
+        System.out.println("\nAvailable regular toppings: " +
+                "\nLettuce, Peppers, Onions,\nTomatoes, Jalapeños, Cucumbers,\nPickles, Guacamole, Mushrooms");
+        System.out.println("\nType the topping name or 'done' to finish.");
+        //
+        while (true) {
+            System.out.print("Add topping: ");
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("done")) break;
+            Topping topping = getRegularToppingName(input);
+            if (topping != null) {
+                toppings.add(topping);
+                System.out.println(topping.getName() + " added");
+            } else {
+                System.out.println("Invalid input! Please try again.");
+            }
+        }
+        return toppings;
+    }
+
+    //
+    private List<Topping> whatSauces() {
+        List<Topping> sauces = new ArrayList<>();
+        System.out.println("\n=== Add Sauces & Sides ===");
+        System.out.println("\nAvailable: \nMayo, Mustard, Ketchup,\nRanch, Thousand Islands, Vinaigrette");
+        System.out.println("\nSides: \nAu Jus, Extra Sauce");
+        System.out.println("\nType sauce name or 'done' to finish:");
+        //
+        while (true) {
+            System.out.print("Add sauce/sides: ");
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("done")) break;
+            Topping sauce = getSauceName(input);
+            if (sauce != null) {
+                sauces.add(sauce);
+                System.out.println(sauce.getName() + " added");
+            } else {
+                System.out.println("Invalid input! Please try again.");
+            }
+        }
+        return sauces;
+    }
+
+    //
+
 }
