@@ -37,7 +37,7 @@ public class Order {
     // Method to calculate the subtotal price. Uses the stream method on each type of food list that acquires the price
     // of each one and adds them together.
     public double getSubTotalPrice() {
-        return sandwiches.stream().mapToDouble(Sandwich::getPrice).sum()
+        return sandwiches.stream().mapToDouble(Sandwich::getMeatNCheesePrice).sum()
                 + drinks.stream().mapToDouble(Drink::getPrice).sum()
                 + chips.stream().mapToDouble(Chips::getPrice).sum();
     }

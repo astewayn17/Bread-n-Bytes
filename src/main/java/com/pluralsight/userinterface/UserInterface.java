@@ -43,6 +43,7 @@ public class UserInterface {
 
     //
     private void startNewOrder() {
+        currentOrder = new Order();
         boolean ordering = true;
         while (ordering) {
             int choice = showOrderMenu();
@@ -227,7 +228,7 @@ public class UserInterface {
         List<Topping> sauces = new ArrayList<>();
         System.out.println("\n=== Add Sauces & Sides ===");
         System.out.println("\nAvailable: \nMayo, Mustard, Ketchup,\nRanch, Thousand Islands, Vinaigrette");
-        System.out.println("\nSides: \nAu Jus, Extra Sauce");
+        System.out.println("\nSides: \nAu Jus, Sauce");
         System.out.println("\nType the sauce name or 'done' to finish:");
         //
         while (true) {
@@ -361,5 +362,57 @@ public class UserInterface {
     }
 
     //
+    private Topping getMeatName(String name) {
+        return switch (name.toLowerCase()) {
+            case "steak" -> Topping.steak;
+            case "ham" -> Topping.ham;
+            case "salami" -> Topping.salami;
+            case "roast beef" -> Topping.roastBeef;
+            case "chicken" -> Topping.chicken;
+            case "bacon" -> Topping.bacon;
+            default -> null;
+        };
+    }
 
+    //
+    private Topping getCheeseName(String name) {
+        return switch (name.toLowerCase()) {
+            case "american" -> Topping.american;
+            case "provolone" -> Topping.provolone;
+            case "cheddar" -> Topping.cheddar;
+            case "swiss" -> Topping.swiss;
+            default -> null;
+        };
+    }
+
+    //
+    private Topping getRegularToppingName(String name) {
+        return switch (name.toLowerCase()) {
+            case "lettuce" -> Topping.lettuce;
+            case "peppers" -> Topping.peppers;
+            case "onions" -> Topping.onions;
+            case "tomatoes" -> Topping.tomatoes;
+            case "jalapeños", "jalapenos" -> Topping.jalapenos;
+            case "cucumbers" -> Topping.cucumbers;
+            case "pickles" -> Topping.pickles;
+            case "guacamole" -> Topping.guacamole;
+            case "mushrooms" -> Topping.mushrooms;
+            default -> null;
+        };
+    }
+
+    //
+    private Topping getSauceName(String name) {
+        return switch (name.toLowerCase()) {
+            case "mayo" -> Topping.mayo;
+            case "mustard" -> Topping.mustard;
+            case "ketchup" -> Topping.ketchup;
+            case "ranch" -> Topping.ranch;
+            case "thousand islands" -> Topping.thousand_islands;
+            case "vinaigrette" -> Topping.vinaigrette;
+            case "au jus" -> Topping.auJus;
+            case "sauce" -> Topping.sauce;
+            default -> null;
+        };
+    }
 }
