@@ -25,7 +25,7 @@ public class UserInterface {
             switch (choice) {
                 case 1 -> startNewOrder();
                 case 0 -> running = false;
-                default -> System.out.println("\nInvalid input! Please try again.");
+                default -> System.out.println("\n❌ Invalid input! Please try again.");
             }
         }
     }
@@ -33,7 +33,7 @@ public class UserInterface {
     // Home screen that is used in the run method and validates the user's input and returns the choice
     private int showHomeScreen() {
         while (true) {
-            System.out.println("\n==== Bread 'n Bytes Home ====");
+            System.out.println("===\uD83C\uDF5E Bread 'n Bytes Home \uD83E\uDD6A===");
             System.out.println("1) New Order");
             System.out.println("0) Exit");
             System.out.print("Select an option (1 or 0): ");
@@ -41,7 +41,7 @@ public class UserInterface {
             try {
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("\nInvalid input! Please enter 1 or 0.");
+                System.out.println("\n❌ Invalid input! Please enter 1 or 0.\n");
             }
         }
     }
@@ -58,10 +58,10 @@ public class UserInterface {
                 case 2 -> addingDrink();
                 case 3 -> addingChips();
                 case 4 -> { checkingOut(); ordering = false; }
-                case 0 -> { System.out.println("\nOrder Cancelled.");
+                case 0 -> { System.out.println("\n❌ Order Cancelled.\n");
                             currentOrder = null;
                             ordering = false; }
-                default -> System.out.println("\nInvalid input! Please try again.");
+                default -> System.out.println("\n❌ Invalid input! Please try again.");
             }
         }
     }
@@ -81,7 +81,7 @@ public class UserInterface {
                 int choice = Integer.parseInt(input);
                 return choice;
             } catch (NumberFormatException e) {
-                System.out.println("\nInvalid input! Please enter a number from 0 - 4.");
+                System.out.println("\n❌ Invalid input! Please enter a number from 0 - 4.");
             }
         }
     }
@@ -101,7 +101,7 @@ public class UserInterface {
         whatRegularToppings().forEach(sandwich::addRegularTopping);
         whatSauces().forEach(sandwich::addSauce);
         currentOrder.addSandwich(sandwich);
-        System.out.println("\nSandwich added to order!\n------------------------");
+        System.out.println("\n✅ Sandwich added to order!\n--------------------------");
         System.out.println(sandwich.getSummary());
     }
 
@@ -116,7 +116,7 @@ public class UserInterface {
             System.out.print("Select an option (1-4): ");
             String input = scanner.nextLine().trim();
             if (input.isEmpty()) {
-                System.out.println("\nInput cannot be empty! Please try again.\n");
+                System.out.println("\n❌ Invalid input, cannot be empty! Please try again.\n");
                 continue;
             }
             try {
@@ -126,10 +126,10 @@ public class UserInterface {
                     case 2: return "Wheat";
                     case 3: return "Rye";
                     case 4: return "Wrap";
-                    default: System.out.println("\nInvalid input! Please enter a number from 1 - 4.\n");
+                    default: System.out.println("\n❌ Invalid input! Please enter a number from 1 - 4.\n");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("\nInvalid input! Please enter a number from 1 - 4.\n");
+                System.out.println("\n❌ Invalid input! Please enter a number from 1 - 4.\n");
             }
         }
     }
@@ -153,10 +153,10 @@ public class UserInterface {
                     case 4: return 4;
                     case 8: return 8;
                     case 12: return 12;
-                    default: System.out.println("\nInvalid input! Please enter a number.");
+                    default: System.out.println("\n❌ Invalid input! Please enter a number.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("\nInvalid input! Please enter a number.");
+                System.out.println("\n❌ Invalid input! Please enter a number.");
             }
         }
     }
@@ -171,7 +171,7 @@ public class UserInterface {
             else if (response.equals("no") || response.equals("n"))
                 return false;
             else
-                System.out.println("\nInvalid input! Please enter 'Yes' or 'No'.");
+                System.out.println("\n❌ Invalid input! Please enter 'Yes' or 'No'.");
         }
     }
 
@@ -190,7 +190,7 @@ public class UserInterface {
             try {
                 int choice = Integer.parseInt(input);
                 if (choice < 1 || choice > 6) {
-                    System.out.println("Invalid input! Please enter a number from 1 - 6.");
+                    System.out.println("❌ Invalid input! Please enter a number from 1 - 6.");
                     continue;
                 }
                 // The choice is the user entered meat number and that gets mapped to the corresponding index on the
@@ -206,7 +206,7 @@ public class UserInterface {
                     meatCount++;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a number or 'x' to finish.");
+                System.out.println("❌ Invalid input! Please enter a number or 'x' to finish.");
             }
         }
         return meats;
@@ -227,7 +227,7 @@ public class UserInterface {
             try {
                 int choice = Integer.parseInt(input);
                 if (choice < 1 || choice > 4) {
-                    System.out.println("Invalid input! Please enter a number from 1 - 4.");
+                    System.out.println("❌ Invalid input! Please enter a number from 1 - 4.");
                     continue;
                 }
                 String[] cheeseNames = {"american", "provolone", "cheddar", "swiss"};
@@ -240,7 +240,7 @@ public class UserInterface {
                     cheeseCount++;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a number or 'x' to finish.");
+                System.out.println("❌ Invalid input! Please enter a number or 'x' to finish.");
             }
         }
         return cheeses;
@@ -271,7 +271,7 @@ public class UserInterface {
                     case 7: toppingName = "pickles"; break;
                     case 8: toppingName = "guacamole"; break;
                     case 9: toppingName = "mushrooms"; break;
-                    default: System.out.println("Invalid input! Please enter a number from 1 - 9."); continue;
+                    default: System.out.println("❌ Invalid input! Please enter a number from 1 - 9."); continue;
                 }
                 Topping topping = getRegularToppingName(toppingName);
                 if (topping != null) {
@@ -279,7 +279,7 @@ public class UserInterface {
                     System.out.println(topping.getName() + " added");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a number or 'x' to finish.");
+                System.out.println("❌ Invalid input! Please enter a number or 'x' to finish.");
             }
         }
         return toppings;
@@ -310,7 +310,7 @@ public class UserInterface {
                     default -> null;
                 };
                 if (sauceName == null) {
-                    System.out.println("Invalid input! Please enter a number from 1 - 8.");
+                    System.out.println("❌ Invalid input! Please enter a number from 1 - 8.");
                     continue;
                 }
                 Topping sauce = getSauceName(sauceName);
@@ -319,7 +319,7 @@ public class UserInterface {
                     System.out.println(sauce.getName() + " added");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a number or 'x' to finish.");
+                System.out.println("❌ Invalid input! Please enter a number or 'x' to finish.");
             }
         }
         return sauces;
@@ -345,10 +345,10 @@ public class UserInterface {
                     flavor = flavors[flavorChoice - 1];
                     break;
                 } else {
-                    System.out.println("Invalid input! Please enter a number from 1 - 12.");
+                    System.out.println("❌ Invalid input! Please enter a number from 1 - 12.");
                 }
             } else {
-                System.out.println("Invalid input! Please enter a number from 1 - 12.");
+                System.out.println("❌ Invalid input! Please enter a number from 1 - 12.");
                 scanner.nextLine();
             }
         }
@@ -366,17 +366,17 @@ public class UserInterface {
                     case 1 -> size = "Small";
                     case 2 -> size = "Medium";
                     case 3 -> size = "Large";
-                    default -> { System.out.println("Invalid input! Please enter 1, 2, or 3.");
+                    default -> { System.out.println("❌ Invalid input! Please enter 1, 2, or 3.");
                         continue; }
                 } break;
             } else {
-                System.out.println("Invalid input! Please enter a number from 1 - 3.");
+                System.out.println("❌ Invalid input! Please enter a number from 1 - 3.");
                 scanner.nextLine();
             }
         }
         Drink drink = new Drink(size, flavor);
         currentOrder.addDrink(drink);
-        System.out.println("\n" + drink.getSummary() + "\nAdded to order!");
+        System.out.println("\n" + drink.getSummary() + "\n✅ Added to order!");
     }
 
     // Prompts the user what chips they would like to add to the order. Similar to addingDrinks method without the size
@@ -397,16 +397,16 @@ public class UserInterface {
                     type = chipOptions[choice - 1];
                     break;
                 } else {
-                    System.out.println("Invalid input! Please enter a number from 1 - 9.");
+                    System.out.println("❌ Invalid input! Please enter a number from 1 - 9.");
                 }
             } else {
-                System.out.println("Invalid input! Please enter a number from 1 - 9.");
+                System.out.println("❌ Invalid input! Please enter a number from 1 - 9.");
                 scanner.nextLine();
             }
         }
         Chips chips = new Chips(type);
         currentOrder.addChips(chips);
-        System.out.println("\n" + chips.getSummary() + "Added to order!");
+        System.out.println("\n" + chips.getSummary() + "✅ Added to order!");
     }
 
     // Method to check out the order with confirmation and display it to the user and an option to cancel it instead.
@@ -423,14 +423,13 @@ public class UserInterface {
             if (confirm.equals("yes") || confirm.equals("y") || confirm.equals("no") || confirm.equals("n")) {
                 break;
             }
-            System.out.println("Invalid input! Please enter 'Yes' or 'No'.");
+            System.out.println("❌ Invalid input! Please enter 'Yes' or 'No'.");
         }
         if (confirm.equals("yes") || confirm.equals("y")) {
             ReceiptWriter.saveReceipt(currentOrder);
-            System.out.println("\nOrder confirmed! Receipt saved.");
-            System.out.println("Thank you for your order!");
+            System.out.println("\n✅ Order confirmed! Thank you!");
         } else {
-            System.out.println("\nOrder cancelled.");
+            System.out.println("\n❌ Order cancelled.");
         }
         currentOrder = null;
     }
