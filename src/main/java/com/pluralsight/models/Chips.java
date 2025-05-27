@@ -13,7 +13,7 @@ public class Chips {
 
     // Shows a simple summary that the order class uses to show it to the user
     public String getSummary() {
-        return String.format("%s - $%.2f\n", this.brand, this.price);
+        return String.format("%s - $%.2f", this.brand, this.price);
     }
 
     // Standard getters

@@ -43,7 +43,7 @@ public class ReceiptWriter {
         // Checks if the order has sandwiches first and then iterates through them while appending
         // each of them together and adding the number to each
         if (!order.getSandwiches().isEmpty()) {
-            sb.append("SANDWICHES:\n");
+            sb.append("SANDWICHES:");
             int sandwichNumber = 1;
             for (Sandwich sandwich : order.getSandwiches()) {
                 sb.append("\n").append(sandwichNumber++).append(". ");
@@ -54,7 +54,7 @@ public class ReceiptWriter {
             int drinkNumber = 1;
             for (Drink drink : order.getDrinks()) {
                 sb.append(drinkNumber++).append(". ");
-                sb.append(drink.getSummary());
+                sb.append(drink.getSummary()).append("\n");
             }
         } if (!order.getChips().isEmpty()) {
             sb.append("\nCHIPS:\n");

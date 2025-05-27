@@ -17,14 +17,14 @@ public class Sandwich {
     private double basePrice;
 
     // Constructor with three parameters that the user can enter for the sandwich specifically
-    public Sandwich(int size, String breadType, boolean isToasted) {
+    public Sandwich(int size, String breadType) {
         this.size = size;
         this.breadType = breadType;
         this.meats = new ArrayList<>();
         this.cheeses = new ArrayList<>();
         this.regularToppings = new ArrayList<>();
         this.sauces = new ArrayList<>();
-        this.isToasted = isToasted;
+        this.isToasted = false;
         this.basePrice = priceForSize();
     }
 
@@ -100,35 +100,35 @@ public class Sandwich {
         if (isToasted) {
             sb.append(" (Toasted)");
         }
-        sb.append(String.format(" - $%.2f", getMeatNCheesePrice()));
         // If there are any meats in the list, it will append the information and stream through the meat list and get
         // the name and use an internal ternary to write if the meat is extra or not and then it collects the strings
         // neatly displays them together. Same thing for the cheese and regular toppings.
         if (!meats.isEmpty()) {
-            sb.append("\n  Meats: ");
+            sb.append("\n   Meats: ");
             sb.append(meats.stream()
                     .map(meat -> meat.getName() + (meat.isExtra() ? " (Extra)" : ""))
                     .collect(Collectors.joining(", ")));
         } if (!cheeses.isEmpty()) {
-            sb.append("\n  Cheeses: ");
+            sb.append("\n   Cheeses: ");
             sb.append(cheeses.stream()
                     .map(cheese -> cheese.getName() + (cheese.isExtra() ? " (Extra)" : ""))
                     .collect(Collectors.joining(", ")));
         } if (!regularToppings.isEmpty()) {
-            sb.append("\n  Toppings: ");
+            sb.append("\n   Toppings: ");
             sb.append(regularToppings.stream()
                     .map(Topping::getName)
                     .collect(Collectors.joining(", ")));
         } if (!sauces.isEmpty()) {
-            sb.append("\n  Sauces: ");
+            sb.append("\n   Sauces: ");
             sb.append(sauces.stream()
                     .map(Topping::getName)
                     .collect(Collectors.joining(", ")));
         }
+        sb.append(String.format("\n   Price: $%.2f", getMeatNCheesePrice()));
         return sb.toString();
     }
 
-    // Standard getters for the declared variables
+    // Standard getters and setter for the declared variables
     public int getSize() { return size; }
     public String getBreadType() { return breadType; }
     public List<Topping> getMeats() { return new ArrayList<>(meats); }
@@ -136,4 +136,5 @@ public class Sandwich {
     public List<Topping> getRegularToppings() { return new ArrayList<>(regularToppings); }
     public List<Topping> getSauces() { return new ArrayList<>(sauces); }
     public boolean isToasted() { return isToasted; }
+    public void setToasted(boolean toasted) { isToasted = toasted; }
 }
