@@ -1,6 +1,8 @@
 package com.pluralsight.userinterface;
 
 import com.pluralsight.models.*;
+import com.pluralsight.utilities.ReceiptWriter;
+
 import java.util.*;
 
 public class UserInterface {
@@ -107,11 +109,10 @@ public class UserInterface {
                     case 2: return "Wheat";
                     case 3: return "Rye";
                     case 4: return "Wrap";
-                    default:
-                        System.out.println("Invalid input! Please try again.");
+                    default: System.out.println("Invalid input! Please try again.");
                 }
             } else {
-                System.out.println("Invalid input (not a number)! Please try again.");
+                System.out.println("Invalid input! Please try again.");
                 scanner.nextLine();
             }
         }
@@ -161,7 +162,7 @@ public class UserInterface {
             if (input.equals("done")) break;
             Topping meat = getMeatName(input);
             if (meat != null) {
-                System.out.print("Is this extra meat? (yes/no): ");
+                System.out.print("Is this extra meat? (Yes/No): ");
                 String extraInput = scanner.nextLine().trim().toLowerCase();
                 boolean isExtra = extraInput.equals("yes") || extraInput.equals("y");
                 meats.add(Topping.getInstance(meat, isExtra));
@@ -186,7 +187,7 @@ public class UserInterface {
             if (input.equals("done")) break;
             Topping cheese = getCheeseName(input);
             if (cheese != null) {
-                System.out.print("Is this extra cheese? (yes/no): ");
+                System.out.print("Is this extra cheese? (Yes/No): ");
                 String extraInput = scanner.nextLine().trim().toLowerCase();
                 boolean isExtra = extraInput.equals("yes") || extraInput.equals("y");
                 cheeses.add(Topping.getInstance(cheese, isExtra));
@@ -227,7 +228,7 @@ public class UserInterface {
         System.out.println("\n=== Add Sauces & Sides ===");
         System.out.println("\nAvailable: \nMayo, Mustard, Ketchup,\nRanch, Thousand Islands, Vinaigrette");
         System.out.println("\nSides: \nAu Jus, Extra Sauce");
-        System.out.println("\nType sauce name or 'done' to finish:");
+        System.out.println("\nType the sauce name or 'done' to finish:");
         //
         while (true) {
             System.out.print("Add sauce/sides: ");
@@ -242,6 +243,121 @@ public class UserInterface {
             }
         }
         return sauces;
+    }
+
+    //
+    private void addingDrink() {
+        System.out.println("\n=== Add Drink ===");
+        //
+        String[] flavors = { "Coke", "Diet Coke", "Sprite", "Root Beer", "Dr Pepper", "Mountain Dew",
+                "Ginger Ale", "Iced Tea", "Fruit Punch", "Celsius", "Sparkling Water", "Water" };
+        int flavorChoice;
+        String flavor;
+        while (true) {
+            System.out.println("\nAvailable Flavors:");
+            for (int i = 0; i < flavors.length; i++) {
+                System.out.printf("%d) %s%n", i + 1, flavors[i]);
+            }
+            System.out.print("Select an option (1–12): ");
+            if (scanner.hasNextInt()) {
+                flavorChoice = scanner.nextInt();
+                scanner.nextLine();
+                if (flavorChoice >= 1 && flavorChoice <= flavors.length) {
+                    flavor = flavors[flavorChoice - 1];
+                    break;
+                } else {
+                    System.out.println("Invalid input! Please try again.");
+                }
+            } else {
+                System.out.println("Invalid input! Please try again.");
+                scanner.nextLine();
+            }
+        }
+        //
+        String size;
+        while (true) {
+            System.out.println("\nSelect size:");
+            System.out.println("1) Small - $2.00");
+            System.out.println("2) Medium - $2.50");
+            System.out.println("3) Large - $3.00");
+            System.out.print("Select an option (1–3): ");
+            if (scanner.hasNextInt()) {
+                int sizeChoice = scanner.nextInt();
+                scanner.nextLine();
+                switch (sizeChoice) {
+                    case 1 -> size = "Small";
+                    case 2 -> size = "Medium";
+                    case 3 -> size = "Large";
+                    default -> { System.out.println("Invalid input! Please try again.");
+                        continue; }
+                } break;
+            } else {
+                System.out.println("Invalid input! Please try again.");
+                scanner.nextLine();
+            }
+        }
+        //
+        Drink drink = new Drink(size, flavor);
+        currentOrder.addDrink(drink);
+        System.out.println("\n" + drink.getSummary() + "added to order!");
+    }
+
+    //
+    private void addingChips() {
+        System.out.println("\n=== Add Chips ===");
+        //
+        String[] chipOptions = { "Classic Lay's", "BBQ Lay's", "Doritos Nacho Cheese", "Doritos Cool Ranch",
+                "Cheetos", "Ruffles Cheddar & Sour Cream", "SunChips", "Salt & Vinegar", "Jalapeño Chips" };
+        for (int i = 0; i < chipOptions.length; i++) {
+            System.out.printf("%d) %s%n", i + 1, chipOptions[i]);
+        }
+        String type;
+        while (true) {
+            System.out.print("Select an option (1–9): ");
+            if (scanner.hasNextInt()) {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                if (choice >= 1 && choice <= chipOptions.length) {
+                    type = chipOptions[choice - 1];
+                    break;
+                } else {
+                    System.out.println("Invalid input! Please try again.");
+                }
+            } else {
+                System.out.println("Invalid input! Please try again.");
+                scanner.nextLine();
+            }
+        }
+        //
+        Chips chips = new Chips(type);
+        currentOrder.addChips(chips);
+        System.out.println("\n" + chips.getSummary() + "added to order!");
+    }
+
+    //
+    private void checkingOut() {
+        if (currentOrder.isEmpty()) {
+            System.out.println("\nNothing in your order.");
+            return;
+        }
+        System.out.println("\n" + currentOrder.getOrderSummary());
+        String confirm;
+        while (true) {
+            System.out.print("Confirm order? (Yes/No): ");
+            confirm = scanner.nextLine().trim().toLowerCase();
+            if (confirm.equals("yes") || confirm.equals("y") || confirm.equals("no") || confirm.equals("n")) {
+                break;
+            }
+            System.out.println("Invalid input! Please try again.");
+        }
+        if (confirm.equals("yes") || confirm.equals("y")) {
+            ReceiptWriter.saveReceipt(currentOrder);
+            System.out.println("\nOrder confirmed! Receipt saved.");
+            System.out.println("Thank you for your order!");
+        } else {
+            System.out.println("Order cancelled.");
+        }
+        currentOrder = null;
     }
 
     //
