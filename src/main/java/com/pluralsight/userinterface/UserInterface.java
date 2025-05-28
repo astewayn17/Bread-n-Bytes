@@ -224,9 +224,9 @@ public class UserInterface {
             System.out.println("\n╭──────────────────────────────╮");
             System.out.println("│          Bread Size          │");
             System.out.println("├──────────────────────────────┤");
-            System.out.println("│ 4 Inches                     │");
-            System.out.println("│ 8 Inches                     │");
-            System.out.println("│ 12 Inches                    │");
+            System.out.println("│ 4 -  Inches                  │");
+            System.out.println("│ 8 -  Inches                  │");
+            System.out.println("│ 12 - Inches                  │");
             System.out.println("╰──────────────────────────────╯");
             System.out.print("Select an option (4, 8, or 12): ");
             String input = scanner.nextLine().trim();
