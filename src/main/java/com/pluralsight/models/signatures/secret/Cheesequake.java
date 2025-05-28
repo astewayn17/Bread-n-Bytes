@@ -5,7 +5,7 @@ import com.pluralsight.models.Topping;
 
 public class Cheesequake extends Sandwich {
 
-    //
+    // Constructor that sets up a new secret signature sandwich object with pre-assigned ingredients and is set to true
     public Cheesequake() {
         super(8, "Wheat", true);
         setToasted(true);
@@ -17,4 +17,8 @@ public class Cheesequake extends Sandwich {
         addRegularTopping(Topping.onions);
         addSauce(Topping.sauce);
     }
+
+    // Will show up in the User Interface as the signature sandwich name above the info when selected
+    @Override
+    public String toString() { return "Cheese-quake Sandwich:"; }
 }

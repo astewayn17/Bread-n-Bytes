@@ -129,8 +129,7 @@ public class UserInterface {
     private Sandwich makeCustom() {
         String breadType = whatBreadType();
         int size = whatSize();
-        boolean isSecret = isChosenSandwichSecret();
-        Sandwich sandwich = new Sandwich(size, breadType, isSecret);
+        Sandwich sandwich = new Sandwich(size, breadType, false);
         whatMeats().forEach(sandwich::addMeat);
         whatCheeses().forEach(sandwich::addCheese);
         sandwich.setToasted(toastedOrNot());
@@ -160,9 +159,12 @@ public class UserInterface {
     }
 
     // Prompts user what sandwich they would like to choose. Will be based on the sandwich object from each signature
-    // Then displays it to the user and checks if the user wants to customize it or not and returns it
+    // Then displays it to the user and checks if the user wants to customize it or not and returns it.
+    // If the user wants to see the secret menu, and they enter the correct password, then they will get access to the
+    // full secret menu.
     private Sandwich chooseSignature() {
         while (true) {
+            // Will run the standard menu at first
             if (!secretMenuUnlocked) {
                 System.out.println("\n╭──────────────────────────────╮");
                 System.out.println("│     Signature Sandwiches     │");
@@ -176,7 +178,7 @@ public class UserInterface {
                 System.out.println("╰──────────────────────────────╯");
                 System.out.print("Select an option (0–4 or '?'): ");
             } else {
-                System.out.println("༺══════༻ Secret  Menu ༺══════༻");
+                System.out.println("\n༺══════༻ Secret  Menu ༺══════༻");
                 System.out.println("│     Signature Sandwiches     │");
                 System.out.println("├──────────────────────────────┤");
                 System.out.println("│ 1) BLT                       │");
@@ -185,29 +187,41 @@ public class UserInterface {
                 System.out.println("│ 4) Veggie Crunch             │");
                 System.out.println("│ 5) Cheese-quake              │");
                 System.out.println("│ 6) The Butcher's Secret      │");
-                System.out.println("│ 7) Mother of All Sandwiches  │");
+                System.out.println("│ 7) Mother of all Sandwiches  │");
                 System.out.println("│ 0) Cancel                    │");
                 System.out.println("༺═════════════════════════════༻");
-                System.out.print("Select an option (1–7 or 0): ");
+                System.out.print("Select an option (0-7): ");
             }
             String input = scanner.nextLine().trim();
-            //
+            // If the user wants to see the secret menu, the following will occur
             if (input.equals("?") && !secretMenuUnlocked) {
                 System.out.print("Enter the secret password: ");
-                String password = scanner.nextLine().trim();
+                String pwEntered = scanner.nextLine().trim();
+                if (pwEntered.equalsIgnoreCase("iluvfood")) {
+                    secretMenuUnlocked = true;
+                    System.out.println("\n✅ Access granted, Secret Menu unlocked!");
+                    continue;
+                } else {
+                    System.out.println("\n❌ Access denied, incorrect password.");
+                    continue;
+                }
             }
             Sandwich sandwich = null;
-            switch (input) {
-                case "1": sandwich = new BLT();break;
-                case "2": sandwich = new PhillyCheeseSteak();break;
-                case "3": sandwich = new TexMexWrap();break;
-                case "4": sandwich = new VeggieCrunch();break;
-                case "?": sandwich = new xxxxxxxx();break;
-                case "5": sandwich = new Cheesequake();break;
-                case "6": sandwich = new TheButchersSecret();break;
-                case "7": sandwich = new MOAS();break;
-                case "0": return null;
-                default: System.out.println("\n❌ Invalid input! Please enter 1 - 4 or '?'."); continue;
+            try {
+                switch (input) {
+                    case "1": sandwich = new BLT(); break;
+                    case "2": sandwich = new PhillyCheeseSteak(); break;
+                    case "3": sandwich = new TexMexWrap(); break;
+                    case "4": sandwich = new VeggieCrunch(); break;
+                    case "5": sandwich = new Cheesequake(); break;
+                    case "6": sandwich = new TheButchersSecret(); break;
+                    case "7": sandwich = new MOAS(); break;
+                    case "0": return null;
+                    default: System.out.println("\n❌ Invalid input! Please enter a number or '?'."); continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("\n❌ Invalid input! Please enter a number or '?'.");
+                continue;
             }
             System.out.println("\n" + sandwich);
             System.out.println("--------------------------------");
