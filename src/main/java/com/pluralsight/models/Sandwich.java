@@ -15,9 +15,10 @@ public class Sandwich {
     private List<Topping> sauces;
     private boolean isToasted;
     private double basePrice;
+    private boolean isSecret;
 
     // Constructor with three parameters that the user can enter for the sandwich specifically
-    public Sandwich(int size, String breadType) {
+    public Sandwich(int size, String breadType, boolean isSecret) {
         this.size = size;
         this.breadType = breadType;
         this.meats = new ArrayList<>();
@@ -26,6 +27,7 @@ public class Sandwich {
         this.sauces = new ArrayList<>();
         this.isToasted = false;
         this.basePrice = priceForSize();
+        this.isSecret = isSecret;
     }
 
     // Calculates the price for the base sandwich price based on the size

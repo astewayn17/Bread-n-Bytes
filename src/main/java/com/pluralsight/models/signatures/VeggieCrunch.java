@@ -6,7 +6,7 @@ public class VeggieCrunch extends Sandwich {
 
     // Constructor that sets up a new signature sandwich object with pre-assigned ingredients
     public VeggieCrunch() {
-        super(8, "Wheat"); // 8" Wheat bread
+        super(8, "Wheat", false);
         setToasted(false);
         addCheese(Topping.provolone);
         addRegularTopping(Topping.lettuce);

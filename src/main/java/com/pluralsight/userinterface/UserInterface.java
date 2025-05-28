@@ -2,15 +2,19 @@ package com.pluralsight.userinterface;
 
 import com.pluralsight.models.*;
 import com.pluralsight.models.signatures.*;
+import com.pluralsight.models.signatures.secret.Cheesequake;
+import com.pluralsight.models.signatures.secret.MOAS;
+import com.pluralsight.models.signatures.secret.TheButchersSecret;
 import com.pluralsight.utilities.ReceiptWriter;
 
 import java.util.*;
 
 public class UserInterface {
 
-    // Declaring the scanner and the current order variables
+    // Declaring the scanner and the current order variables and to control if the secret menu is unlocked
     private Scanner scanner;
     private Order currentOrder;
+    private boolean secretMenuUnlocked = false;
 
     // Constructor
     public UserInterface() {
@@ -125,7 +129,8 @@ public class UserInterface {
     private Sandwich makeCustom() {
         String breadType = whatBreadType();
         int size = whatSize();
-        Sandwich sandwich = new Sandwich(size, breadType);
+        boolean isSecret = isChosenSandwichSecret();
+        Sandwich sandwich = new Sandwich(size, breadType, isSecret);
         whatMeats().forEach(sandwich::addMeat);
         whatCheeses().forEach(sandwich::addCheese);
         sandwich.setToasted(toastedOrNot());
@@ -158,25 +163,51 @@ public class UserInterface {
     // Then displays it to the user and checks if the user wants to customize it or not and returns it
     private Sandwich chooseSignature() {
         while (true) {
-            System.out.println("\n╭──────────────────────────────╮");
-            System.out.println("│     Signature Sandwiches     │");
-            System.out.println("├──────────────────────────────┤");
-            System.out.println("│ 1) BLT                       │");
-            System.out.println("│ 2) Philly Cheese Steak       │");
-            System.out.println("│ 3) Tex-Mex Wrap              │");
-            System.out.println("│ 4) Veggie Crunch             │");
-            System.out.println("│ 0) Cancel                    │");
-            System.out.println("╰──────────────────────────────╯");
-            System.out.print("Select an option (0–4): ");
+            if (!secretMenuUnlocked) {
+                System.out.println("\n╭──────────────────────────────╮");
+                System.out.println("│     Signature Sandwiches     │");
+                System.out.println("├──────────────────────────────┤");
+                System.out.println("│ 1) BLT                       │");
+                System.out.println("│ 2) Philly Cheese Steak       │");
+                System.out.println("│ 3) Tex-Mex Wrap              │");
+                System.out.println("│ 4) Veggie Crunch             │");
+                System.out.println("│ ?) Admin (Secret Password)   │");
+                System.out.println("│ 0) Cancel                    │");
+                System.out.println("╰──────────────────────────────╯");
+                System.out.print("Select an option (0–4 or '?'): ");
+            } else {
+                System.out.println("༺══════༻ Secret  Menu ༺══════༻");
+                System.out.println("│     Signature Sandwiches     │");
+                System.out.println("├──────────────────────────────┤");
+                System.out.println("│ 1) BLT                       │");
+                System.out.println("│ 2) Philly Cheese Steak       │");
+                System.out.println("│ 3) Tex-Mex Wrap              │");
+                System.out.println("│ 4) Veggie Crunch             │");
+                System.out.println("│ 5) Cheese-quake              │");
+                System.out.println("│ 6) The Butcher's Secret      │");
+                System.out.println("│ 7) Mother of All Sandwiches  │");
+                System.out.println("│ 0) Cancel                    │");
+                System.out.println("༺═════════════════════════════༻");
+                System.out.print("Select an option (1–7 or 0): ");
+            }
             String input = scanner.nextLine().trim();
+            //
+            if (input.equals("?") && !secretMenuUnlocked) {
+                System.out.print("Enter the secret password: ");
+                String password = scanner.nextLine().trim();
+            }
             Sandwich sandwich = null;
             switch (input) {
                 case "1": sandwich = new BLT();break;
                 case "2": sandwich = new PhillyCheeseSteak();break;
                 case "3": sandwich = new TexMexWrap();break;
                 case "4": sandwich = new VeggieCrunch();break;
+                case "?": sandwich = new xxxxxxxx();break;
+                case "5": sandwich = new Cheesequake();break;
+                case "6": sandwich = new TheButchersSecret();break;
+                case "7": sandwich = new MOAS();break;
                 case "0": return null;
-                default: System.out.println("\n❌ Invalid input! Please enter a number from 0 - 4."); continue;
+                default: System.out.println("\n❌ Invalid input! Please enter 1 - 4 or '?'."); continue;
             }
             System.out.println("\n" + sandwich);
             System.out.println("--------------------------------");

@@ -6,7 +6,7 @@ public class BLT extends Sandwich {
 
     // Constructor that sets up a new signature sandwich object with pre-assigned ingredients
     public BLT() {
-        super(8, "White");
+        super(8, "White", false);
         setToasted(true);
         addMeat(Topping.bacon);
         addCheese(Topping.cheddar);

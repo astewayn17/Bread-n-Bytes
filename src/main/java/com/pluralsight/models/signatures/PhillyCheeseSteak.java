@@ -6,7 +6,7 @@ public class PhillyCheeseSteak extends Sandwich {
 
     // Constructor that sets up a new signature sandwich object with pre-assigned ingredients
     public PhillyCheeseSteak() {
-        super(8, "White");
+        super(8, "White", false);
         setToasted(true);
         addMeat(Topping.steak);
         addCheese(Topping.american);
