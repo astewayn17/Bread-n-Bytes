@@ -23,7 +23,7 @@ public class Order {
     // Constructor with no parameters since the user won't need to pass anything into it. Will record the current time,
     // the order number will go up every time the user makes a new order and the food are array list types
     public Order() {
-        orderNumber = "Order Number:                 " + (++orderCounter); //
+        orderNumber = "" + (++orderCounter);
         orderDateTime = LocalDateTime.now();
         sandwiches = new ArrayList<>();
         drinks = new ArrayList<>();
@@ -49,11 +49,12 @@ public class Order {
     // This is used to display the order summary to the user
     public String getOrderSummary() {
         StringBuilder sb = new StringBuilder();
-        sb.append("      **** ORDER SUMMARY ****");
-        sb.append("\n" + orderNumber);
+        sb.append("      **** ORDER SUMMARY ****\n");
+        sb.append("===================================\n");
+        sb.append("Order Number:                  " + orderNumber);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy h:mm a");
-        sb.append("\nOrder Date:       " + orderDateTime.format(formatter));
-        sb.append("\n").append("=".repeat(35));
+        sb.append("\nOrder Date:        " + orderDateTime.format(formatter));
+        sb.append("\n-----------------------------------");
         // If statement that lists a food type if it is present using the string builder. It goes through the respective
         // lists and with IntStream.range, it makes a stream of integers from 0 to however many foods there are. The
         // line below that maps each integer index into a string and gets the summary of that food. Then it collects the
@@ -75,12 +76,12 @@ public class Order {
                     .collect(Collectors.joining("\n")));
         }
         // Displays the formatted info for the totals and tax and returns all the info using the toString method
-        sb.append("\n").append("=".repeat(35)).append("\n");
+        sb.append("\n").append("-----------------------------------\n");
         sb.append(String.format(" SUBTOTAL:                  $%.2f\n", getSubTotalPrice()));
         sb.append(String.format(" TAXABLE:                   $%.2f\n", getSubTotalPrice()));
         sb.append(String.format(" TAX (8.25%%):               $%.2f\n", taxRate * getSubTotalPrice()));
         sb.append(String.format(" TOTAL:                     $%.2f\n", getTotalPrice()));
-        sb.append("=".repeat(35)).append("\n");
+        sb.append("-----------------------------------\n");
         return sb.toString();
     }
 

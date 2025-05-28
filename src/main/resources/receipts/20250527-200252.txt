@@ -1,0 +1,37 @@
+                     RECEIPT
+                  Bread 'n Bytes
+     123 N Main St Dallas, Texas 75001-5234
+             Phone: (214) 555-4444
+==================================================
+              Order Number: 1583              Date: MM/dd/yy h:mm a2025-05-27T19:53:25.753275200
+
+ORDER DETAILS:
+--------------------------------------------------
+SANDWICHES:
+1. 8" White Sandwich (Toasted) - $10.50
+  Meats: Bacon
+  Cheeses: Cheddar
+  Toppings: Lettuce, Tomatoes
+  Sauces: Ranch
+2. 8" Wrap Sandwich - $10.50
+  Meats: Chicken
+  Cheeses: Cheddar
+  Toppings: Jalapeños, Peppers, Onions, Guacamole
+  Sauces: Ranch, Sauce
+DRINKS:
+1. Large Coke - $3.00
+2. Large Sprite - $3.00
+
+CHIPS:
+1. Salt & Vinegar - $1.502. Ruffles Cheddar - $1.50
+--------------------------------------------------
+          SUBTOTAL:               $30.00
+          TAXABLE:                $30.00
+          TAX (8.25%):            $2.48
+          TOTAL:                  $32.48
+
+  Paid American Express 12345     $32.48
+               Items Sold:     6
+==================================================
+      Thank you for choosing Bread 'n Bytes!
+               Visit us again soon!

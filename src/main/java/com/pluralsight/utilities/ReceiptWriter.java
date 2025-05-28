@@ -31,14 +31,15 @@ public class ReceiptWriter {
     public static String receiptFormatter(Order order) {
         // Heading/Top
         StringBuilder sb = new StringBuilder();
-        sb.append("                     RECEIPT\n").append("                  Bread 'n Bytes\n");
-        sb.append("     123 N Main St Dallas, Texas 75001-5234\n").append("             Phone: (214) 555-4444\n\n");
-        sb.append("=".repeat(50)).append("\n\n");
-        // Formats the date printed on the receipt and then the order details below it
-        DateTimeFormatter fileNameFormatter2 = DateTimeFormatter.ofPattern("MM/dd/yy h:mm a");
-        sb.append("Date: ").append(LocalDateTime.now().format(fileNameFormatter2)).append("\n\n");
-        sb.append("ORDER DETAILS:\n");
-        sb.append("-".repeat(50)).append("\n\n");
+        sb.append("                     RECEIPT\n");
+        sb.append("                  Bread 'n Bytes\n");
+        sb.append("      123 N Main St Dallas, Texas 75001-5234\n");
+        sb.append("               Phone: (214) 555-4444\n");
+        sb.append("==================================================\n");
+        sb.append("                Order Number: " + order.getOrderNumber());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy h:mm a");
+        sb.append(String.format("\n              Date: %s\n", order.getOrderDateTime().format(formatter)));
+        sb.append("--------------------------------------------------\n");
         // These are standard for each loops instead of streams so they can be easily formatted
         // Checks if the order has sandwiches first and then iterates through them while appending
         // each of them together and adding the number to each
@@ -57,23 +58,25 @@ public class ReceiptWriter {
                 sb.append(drink.getSummary()).append("\n");
             }
         } if (!order.getChips().isEmpty()) {
-            sb.append("\nCHIPS:\n");
+            sb.append("CHIPS:\n");
             int chipsNumber = 1;
             for (Chips chips : order.getChips()) {
                 sb.append(chipsNumber++).append(". ");
-                sb.append(chips.getSummary());
+                sb.append(chips.getSummary()).append("\n");
             }
-            sb.append("\n");
         }
         // The bottom of the receipt showing the charge and footer
-        sb.append("-".repeat(50)).append("\n");
-        sb.append(String.format("SUBTOTAL: $%.2f\n", order.getSubTotalPrice()));
-        sb.append(String.format("TAXABLE: $%.2f\n", order.getSubTotalPrice()));
-        sb.append(String.format("TAX (8.25%%): $%.2f\n", Order.getTaxRate() * order.getSubTotalPrice()));
-        sb.append(String.format("TOTAL: $%.2f\n", order.getTotalPrice()));
-        sb.append("=".repeat(50)).append("\n\n");
-        sb.append("Thank you for choosing Bread 'n Bytes!\n");
-        sb.append("Visit us again soon!\n");
+        sb.append("--------------------------------------------------\n");
+        sb.append(String.format("          SUBTOTAL:               $%.2f\n", order.getSubTotalPrice()));
+        sb.append(String.format("          TAXABLE:                $%.2f\n", order.getSubTotalPrice()));
+        sb.append(String.format("          TAX (8.25%%):            $%.2f\n", Order.getTaxRate() * order.getSubTotalPrice()));
+        sb.append(String.format("          TOTAL:                  $%.2f\n", order.getTotalPrice()));
+        sb.append(String.format("\n          Paid Visa 1234          $%.2f\n", order.getTotalPrice()));
+        int totalItems = order.getSandwiches().size() + order.getDrinks().size() + order.getChips().size();
+        sb.append(String.format("                  Items Sold: %d\n", totalItems));
+        sb.append("==================================================\n");
+        sb.append("      Thank you for choosing Bread 'n Bytes!\n");
+        sb.append("               Visit us again soon!\n");
         return sb.toString();
     }
 

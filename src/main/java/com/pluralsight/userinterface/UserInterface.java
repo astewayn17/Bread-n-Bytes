@@ -34,12 +34,14 @@ public class UserInterface {
     // Home screen that is used in the run method and validates the user's input and returns the choice
     private int showHomeScreen() {
         while (true) {
-            System.out.println("╭──────────────────────────────╮");
-            System.out.println("│     Bread 'n Bytes Home      │");
-            System.out.println("├──────────────────────────────┤ ");
-            System.out.println("│ 1) New Order                 │");
-            System.out.println("│ 0) Exit                      │");
-            System.out.println("╰──────────────────────────────╯");
+            System.out.println("╔══════════════════════════════╗");
+            System.out.println("║  Welcome to Bread 'n Bytes   ║");
+            System.out.println("║        Home Screen!          ║");
+            System.out.println("║  The CLI-ced Sandwich Shop   ║");
+            System.out.println("╠──────────────────────────────╣");
+            System.out.println("║ 1) New Order                 ║");
+            System.out.println("║ 0) Exit                      ║");
+            System.out.println("╚══════════════════════════════╝");
             System.out.print("Select an option (1 or 0): ");
             String input = scanner.nextLine().trim();
             try {
@@ -464,7 +466,7 @@ public class UserInterface {
         System.out.println("│ 11 - Sparkling Water         │");
         System.out.println("│ 12 - Water                   │");
         System.out.println("╰──────────────────────────────╯");
-        System.out.print("Select an option 1–12 : ");
+        System.out.print("Select an option (1–12): ");
         int flavorChoice;
         String flavor;
         while (true) {
@@ -489,7 +491,7 @@ public class UserInterface {
         System.out.println("│ 2 - Medium  $2.50            │");
         System.out.println("│ 3 - Large   $3.00            │");
         System.out.println("╰──────────────────────────────╯");
-        System.out.print("Select an option 1–3: ");
+        System.out.print("Select an option (1–3): ");
         String size;
         while (true) {
             if (scanner.hasNextInt()) {
@@ -509,7 +511,7 @@ public class UserInterface {
         }
         Drink drink = new Drink(size, flavor);
         currentOrder.addDrink(drink);
-        System.out.println("\n" + drink.getSummary() + "\n✅ Added to order!");
+        System.out.println("\n✅ Added to order!\n" + drink.getSummary());
     }
 
     // Prompts the user what chips they would like to add to the order. Similar to addingDrinks method without the size
@@ -548,13 +550,13 @@ public class UserInterface {
         }
         Chips chips = new Chips(type);
         currentOrder.addChips(chips);
-        System.out.println("\n" + chips.getSummary() + "\n✅ Added to order!");
+        System.out.println("\n✅ Added to order!\n" + chips.getSummary());
     }
 
     // Method to check out the order with confirmation and display it to the user and an option to cancel it instead.
     private void checkingOut() {
         if (currentOrder.isEmpty()) {
-            System.out.println("\nNothing in your order.");
+            System.out.println("\nNothing in your order.\n");
             return;
         }
         System.out.println("\n" + currentOrder.getOrderSummary());
@@ -569,7 +571,7 @@ public class UserInterface {
         }
         if (confirm.equals("yes") || confirm.equals("y")) {
             ReceiptWriter.saveReceipt(currentOrder);
-            System.out.println("\n✅ Order confirmed! Thank you!");
+            System.out.println("\n✅ Order confirmed! Thank you!\n");
         } else {
             System.out.println("\n❌ Order cancelled.");
         }
