@@ -320,7 +320,7 @@ public class UserInterface {
         System.out.println("│ 5 - Chicken                  │");
         System.out.println("│ 6 - Bacon                    │");
         System.out.println("╰──────────────────────────────╯");
-        System.out.print("Select an option 1–6 or 'x' to finish: ");
+        System.out.println("Select an option 1–6 or 'x' to finish: ");
         // Loop that will manually record meat as extra if it is more than one.
         int meatCount = 0;
         while (true) {
@@ -364,7 +364,7 @@ public class UserInterface {
         System.out.println("│ 3 - Cheddar                  │");
         System.out.println("│ 4 - Swiss                    │");
         System.out.println("╰──────────────────────────────╯");
-        System.out.print("Select an option 1–4 or 'x' to finish: ");
+        System.out.println("Select an option 1–4 or 'x' to finish: ");
         int cheeseCount = 0;
         while (true) {
             System.out.print("Add cheese: ");
@@ -380,7 +380,7 @@ public class UserInterface {
                 String selectedCheese = cheeseNames[choice - 1];
                 Topping cheese = getCheeseName(selectedCheese);
                 if (cheese != null) {
-                    boolean isExtra = (cheeseCount > 0); // First cheese is regular
+                    boolean isExtra = (cheeseCount > 0);
                     cheeses.add(Topping.getInstance(cheese, isExtra));
                     System.out.println(cheese.getName() + " added" + (isExtra ? " (Extra)" : ""));
                     cheeseCount++;
@@ -451,7 +451,7 @@ public class UserInterface {
         System.out.println("│ 2 - Mustard                  │");
         System.out.println("│ 3 - Ketchup                  │");
         System.out.println("│ 4 - Ranch                    │");
-        System.out.println("│ 5 - Thousand Islands         │");
+        System.out.println("│ 5 - Thousand Island          │");
         System.out.println("│ 6 - Vinaigrette              │");
         System.out.println("│ 7 - Au Jus (Side)            │");
         System.out.println("│ 8 - Sauce (Side)             │");
@@ -671,7 +671,7 @@ public class UserInterface {
             case "mustard" -> Topping.mustard;
             case "ketchup" -> Topping.ketchup;
             case "ranch" -> Topping.ranch;
-            case "thousand islands" -> Topping.thousand_islands;
+            case "thousand islands" -> Topping.thousandIsland;
             case "vinaigrette" -> Topping.vinaigrette;
             case "au jus" -> Topping.auJus;
             case "sauce" -> Topping.sauce;

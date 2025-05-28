@@ -1,0 +1,29 @@
+                     RECEIPT
+                  Bread 'n Bytes
+      123 N Main St Dallas, Texas 75001-5234
+               Phone: (214) 555-4444
+==================================================
+                Order Number: 1583
+              Date: 05/28/25 1:44 PM
+--------------------------------------------------
+SANDWICHES:
+1. 8" White Sandwich (Toasted) - $11.10
+  Meats: Steak
+  Cheeses: American, Swiss
+  Toppings: Peppers, Cucumbers, Guacamole, Tomatoes
+  Sauces: Mayo
+DRINKS:
+1. Large Dr Pepper - $3.00
+CHIPS:
+1. Salt & Vinegar - $1.50
+--------------------------------------------------
+          SUBTOTAL:               $15.60
+          TAXABLE:                $15.60
+          TAX (8.25%):            $1.29
+          TOTAL:                  $16.89
+
+          Paid Visa 1234          $16.89
+                  Items Sold: 3
+==================================================
+      Thank you for choosing Bread 'n Bytes!
+               Visit us again soon!

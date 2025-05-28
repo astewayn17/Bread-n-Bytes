@@ -65,7 +65,7 @@ public class Topping {
     public static final Topping mustard = new Topping("Mustard", ToppingType.SAUCE, priceMap(0.00, 0.00, 0.00));
     public static final Topping ketchup = new Topping("Ketchup", ToppingType.SAUCE, priceMap(0.00, 0.00, 0.00));
     public static final Topping ranch = new Topping("Ranch", ToppingType.SAUCE, priceMap(0.00, 0.00, 0.00));
-    public static final Topping thousand_islands = new Topping("Thousand Islands", ToppingType.SAUCE, priceMap(0.00, 0.00, 0.00));
+    public static final Topping thousandIsland = new Topping("Thousand Islands", ToppingType.SAUCE, priceMap(0.00, 0.00, 0.00));
     public static final Topping vinaigrette = new Topping("Vinaigrette", ToppingType.SAUCE, priceMap(0.00, 0.00, 0.00));
     // Sides (no cost)
     public static final Topping auJus = new Topping("Au Jus", ToppingType.SAUCE, priceMap(0.00, 0.00, 0.00));
