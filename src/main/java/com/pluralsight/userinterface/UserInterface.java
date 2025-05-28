@@ -1,6 +1,7 @@
 package com.pluralsight.userinterface;
 
 import com.pluralsight.models.*;
+import com.pluralsight.models.signatures.*;
 import com.pluralsight.utilities.ReceiptWriter;
 
 import java.util.*;
@@ -33,9 +34,12 @@ public class UserInterface {
     // Home screen that is used in the run method and validates the user's input and returns the choice
     private int showHomeScreen() {
         while (true) {
-            System.out.println("===\uD83C\uDF5E Bread 'n Bytes Home \uD83E\uDD6A===");
-            System.out.println("1) New Order");
-            System.out.println("0) Exit");
+            System.out.println("╭──────────────────────────────╮");
+            System.out.println("│     Bread 'n Bytes Home      │");
+            System.out.println("├──────────────────────────────┤ ");
+            System.out.println("│ 1) New Order                 │");
+            System.out.println("│ 0) Exit                      │");
+            System.out.println("╰──────────────────────────────╯");
             System.out.print("Select an option (1 or 0): ");
             String input = scanner.nextLine().trim();
             try {
@@ -69,12 +73,15 @@ public class UserInterface {
     // This is what is shown to the user that start new order method controls
     private int showOrderMenu() {
         while (true) {
-            System.out.println("\n======== Order  Menu ========");
-            System.out.println("1) Add Sandwich");
-            System.out.println("2) Add Drink");
-            System.out.println("3) Add Chips");
-            System.out.println("4) Checkout");
-            System.out.println("0) Cancel Order");
+            System.out.println("\n╭──────────────────────────────╮");
+            System.out.println("│          Order Menu          │");
+            System.out.println("├──────────────────────────────┤");
+            System.out.println("│ 1) Add Sandwich              │");
+            System.out.println("│ 2) Add Drink                 │");
+            System.out.println("│ 3) Add Chips                 │");
+            System.out.println("│ 4) Checkout                  │");
+            System.out.println("│ 0) Cancel Order              │");
+            System.out.println("╰──────────────────────────────╯");
             System.out.print("Select an option (0–4): ");
             String input = scanner.nextLine().trim();
             try {
@@ -86,37 +93,112 @@ public class UserInterface {
         }
     }
 
-    // Method that adds the sandwich. Begins with the bread type method, sandwich size method, meats, cheese, toasted
-    // or not, toppings and sauces and adds that sandwich to the current order. Uses simplified foreach loops to add the
-    // chosen parts of the sandwich from the methods and adds them to the sandwich object.
+    // Method to add a sandwich to the order. Makes the user choose between starting from scrach or choosing one
+    // Once those methods run, it will return a sandwich object and that will be added to the order and displayed
     private void addingSandwich() {
-        System.out.println("\n======= Add  Sandwich =======");
+        Sandwich sandwich = null;
+        while (sandwich == null) {
+            System.out.println("\n╭──────────────────────────────╮");
+            System.out.println("│        Add a Sandwich        │");
+            System.out.println("├──────────────────────────────┤");
+            System.out.println("│ 1) Create Your Own Sandwich  │");
+            System.out.println("│ 2) Choose Signature Sandwich │");
+            System.out.println("╰──────────────────────────────╯");
+            System.out.print("Select option (1 or 2): ");
+            String input = scanner.nextLine().trim();
+            switch (input) {
+                case "1": sandwich = makeCustom();break;
+                case "2": sandwich = chooseSignature();break;
+                default: System.out.println("\n❌ Invalid input! Please enter 1 or 2.");
+            }
+        }
+        currentOrder.addSandwich(sandwich);
+        System.out.println("\n✅ Sandwich added to order!\n----------------------------");
+        System.out.println(sandwich.getSummary());
+    }
+
+    // Method to make the custom sandwich. Begins with the bread type method, sandwich size method, meats, cheese,
+    // toasted or not, toppings and sauces and returns the sandwich object when done. Uses simplified foreach loops to
+    // add the chosen parts of the sandwich from the methods and adds them to the sandwich object.
+    private Sandwich makeCustom() {
         String breadType = whatBreadType();
         int size = whatSize();
         Sandwich sandwich = new Sandwich(size, breadType);
         whatMeats().forEach(sandwich::addMeat);
         whatCheeses().forEach(sandwich::addCheese);
-        boolean isToasted = toastedOrNot();
-        sandwich.setToasted(isToasted);
+        sandwich.setToasted(toastedOrNot());
         whatRegularToppings().forEach(sandwich::addRegularTopping);
         whatSauces().forEach(sandwich::addSauce);
-        currentOrder.addSandwich(sandwich);
-        System.out.println("\n✅ Sandwich added to order!\n--------------------------");
-        System.out.println(sandwich.getSummary());
+        return sandwich;
+    }
+
+    // Prompts the user whether they want to customize their signature sandwich and returns true or false for that
+    private boolean customizeOrNot() {
+        while (true) {
+            System.out.print("\nWould you like to customize this sandwich? (Yes/No): ");
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("yes") || input.equals("y")) return true;
+            if (input.equals("no") || input.equals("n")) return false;
+            System.out.println("\n❌ Invalid input. Please enter 'Yes' or 'No'.");
+        }
+    }
+
+    // Similar to makeCustom method but is used when the user wants to customize their sandwich
+    private void customizeSandwich(Sandwich sandwich) {
+        whatMeats().forEach(sandwich::addMeat);
+        whatCheeses().forEach(sandwich::addCheese);
+        sandwich.setToasted(toastedOrNot());
+        whatRegularToppings().forEach(sandwich::addRegularTopping);
+        whatSauces().forEach(sandwich::addSauce);
+    }
+
+    // Prompts user what sandwich they would like to choose. Will be based on the sandwich object from each signature
+    // Then displays it to the user and checks if the user wants to customize it or not and returns it
+    private Sandwich chooseSignature() {
+        while (true) {
+            System.out.println("\n╭──────────────────────────────╮");
+            System.out.println("│     Signature Sandwiches     │");
+            System.out.println("├──────────────────────────────┤");
+            System.out.println("│ 1) BLT                       │");
+            System.out.println("│ 2) Philly Cheese Steak       │");
+            System.out.println("│ 3) Tex-Mex Wrap              │");
+            System.out.println("│ 4) Veggie Crunch             │");
+            System.out.println("│ 0) Cancel                    │");
+            System.out.println("╰──────────────────────────────╯");
+            System.out.print("Select an option (0–4): ");
+            String input = scanner.nextLine().trim();
+            Sandwich sandwich = null;
+            switch (input) {
+                case "1": sandwich = new BLT();break;
+                case "2": sandwich = new PhillyCheeseSteak();break;
+                case "3": sandwich = new TexMexWrap();break;
+                case "4": sandwich = new VeggieCrunch();break;
+                case "0": return null;
+                default: System.out.println("\n❌ Invalid input! Please enter a number from 0 - 4."); continue;
+            }
+            System.out.println("\n" + sandwich);
+            System.out.println("--------------------------------");
+            System.out.println(sandwich.getSummary());
+            if (customizeOrNot()) { customizeSandwich(sandwich); }
+            return sandwich;
+        }
     }
 
     // Prompts the user for the bread type and validates that with a try catch included
     private String whatBreadType() {
         while (true) {
-            System.out.println("What type of bread would you like?");
-            System.out.println("1 - White");
-            System.out.println("2 - Wheat");
-            System.out.println("3 - Rye");
-            System.out.println("4 - Wrap");
-            System.out.print("Select an option (1-4): ");
+            System.out.println("\n╭──────────────────────────────╮");
+            System.out.println("│          Bread Type          │");
+            System.out.println("├──────────────────────────────┤");
+            System.out.println("│ 1 - White                    │");
+            System.out.println("│ 2 - Wheat                    │");
+            System.out.println("│ 3 - Rye                      │");
+            System.out.println("│ 4 - Wrap                     │");
+            System.out.println("╰──────────────────────────────╯");
+            System.out.print("Select an option (1–4): ");
             String input = scanner.nextLine().trim();
             if (input.isEmpty()) {
-                System.out.println("\n❌ Invalid input, cannot be empty! Please try again.\n");
+                System.out.println("\n❌ Invalid input, cannot be empty! Please try again.");
                 continue;
             }
             try {
@@ -126,10 +208,10 @@ public class UserInterface {
                     case 2: return "Wheat";
                     case 3: return "Rye";
                     case 4: return "Wrap";
-                    default: System.out.println("\n❌ Invalid input! Please enter a number from 1 - 4.\n");
+                    default: System.out.println("\n❌ Invalid input! Please enter a number from 1 - 4.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("\n❌ Invalid input! Please enter a number from 1 - 4.\n");
+                System.out.println("\n❌ Invalid input! Please enter a number from 1 - 4.");
             }
         }
     }
@@ -137,14 +219,17 @@ public class UserInterface {
     // Prompts the user for the size of the sandwich bread and validates
     private int whatSize() {
         while (true) {
-            System.out.println("\nWhat bread size would you like?");
-            System.out.println("4 Inches");
-            System.out.println("8 Inches");
-            System.out.println("12 Inches");
-            System.out.print("Select an option (4,8,12): ");
+            System.out.println("\n╭──────────────────────────────╮");
+            System.out.println("│          Bread Size          │");
+            System.out.println("├──────────────────────────────┤");
+            System.out.println("│ 4 Inches                     │");
+            System.out.println("│ 8 Inches                     │");
+            System.out.println("│ 12 Inches                    │");
+            System.out.println("╰──────────────────────────────╯");
+            System.out.print("Select an option (4, 8, or 12): ");
             String input = scanner.nextLine().trim();
             if (input.isEmpty()) {
-                System.out.println("\nInput cannot be empty! Please try again.");
+                System.out.println("\n❌ Invalid input, cannot be empty! Please try again.");
                 continue;
             }
             try {
@@ -178,9 +263,17 @@ public class UserInterface {
     // Used to prompt the user on what meats they would like to select
     private List<Topping> whatMeats() {
         List<Topping> meats = new ArrayList<>();
-        System.out.println("\n========= Add Meats =========");
-        System.out.println("1 - Steak\n2 - Ham\n3 - Salami\n4 - Roast Beef\n5 - Chicken\n6 - Bacon");
-        System.out.println("\nSelect an option 1 - 6 or 'x' to finish.");
+        System.out.println("\n╭──────────────────────────────╮");
+        System.out.println("│          Add Meats           │");
+        System.out.println("├──────────────────────────────┤");
+        System.out.println("│ 1 - Steak                    │");
+        System.out.println("│ 2 - Ham                      │");
+        System.out.println("│ 3 - Salami                   │");
+        System.out.println("│ 4 - Roast Beef               │");
+        System.out.println("│ 5 - Chicken                  │");
+        System.out.println("│ 6 - Bacon                    │");
+        System.out.println("╰──────────────────────────────╯");
+        System.out.print("Select an option 1–6 or 'x' to finish: ");
         // Loop that will manually record meat as extra if it is more than one.
         int meatCount = 0;
         while (true) {
@@ -216,9 +309,15 @@ public class UserInterface {
     // Similar to the whatMeats method
     private List<Topping> whatCheeses() {
         List<Topping> cheeses = new ArrayList<>();
-        System.out.println("\n======== Add Cheeses ========");
-        System.out.println("1 - American\n2 - Provolone\n3 - Cheddar\n4 - Swiss");
-        System.out.println("\nSelect an option 1 - 4 or 'x' to finish.");
+        System.out.println("\n╭──────────────────────────────╮");
+        System.out.println("│         Add Cheeses          │");
+        System.out.println("├──────────────────────────────┤");
+        System.out.println("│ 1 - American                 │");
+        System.out.println("│ 2 - Provolone                │");
+        System.out.println("│ 3 - Cheddar                  │");
+        System.out.println("│ 4 - Swiss                    │");
+        System.out.println("╰──────────────────────────────╯");
+        System.out.print("Select an option 1–4 or 'x' to finish: ");
         int cheeseCount = 0;
         while (true) {
             System.out.print("Add cheese: ");
@@ -250,10 +349,20 @@ public class UserInterface {
     // Similar to whatMeats method
     private List<Topping> whatRegularToppings() {
         List<Topping> toppings = new ArrayList<>();
-        System.out.println("\n=== Add Regular Toppings ===");
-        System.out.println("1 - Lettuce\n2 - Peppers\n3 - Onions\n4 - Tomatoes\n5 - Jalapeños" +
-                "\n6 - Cucumbers\n7 - Pickles\n8 - Guacamole\n9 - Mushrooms");
-        System.out.println("\nSelect an option 1 - 9 or 'x' to finish.");
+        System.out.println("\n╭──────────────────────────────╮");
+        System.out.println("│    Add Regular Toppings      │");
+        System.out.println("├──────────────────────────────┤");
+        System.out.println("│ 1 - Lettuce                  │");
+        System.out.println("│ 2 - Peppers                  │");
+        System.out.println("│ 3 - Onions                   │");
+        System.out.println("│ 4 - Tomatoes                 │");
+        System.out.println("│ 5 - Jalapeños                │");
+        System.out.println("│ 6 - Cucumbers                │");
+        System.out.println("│ 7 - Pickles                  │");
+        System.out.println("│ 8 - Guacamole                │");
+        System.out.println("│ 9 - Mushrooms                │");
+        System.out.println("╰──────────────────────────────╯");
+        System.out.println("Select an option 1-9 or 'x' to finish.");
         while (true) {
             System.out.print("Add topping: ");
             String input = scanner.nextLine().trim().toLowerCase();
@@ -288,10 +397,19 @@ public class UserInterface {
     // Prompts the user for what sauces/sides they want. Similar to whatRegularToppings method
     private List<Topping> whatSauces() {
         List<Topping> sauces = new ArrayList<>();
-        System.out.println("\n==== Add Sauces & Sides ====");
-        System.out.println("1 - Mayo\n2 - Mustard\n3 - Ketchup\n4 - Ranch");
-        System.out.println("5 - Thousand Islands\n6 - Vinaigrette\n7 - Au Jus (Side)\n8 - Sauce (Side)");
-        System.out.println("\nSelect an option 1 - 8 or 'x' to finish:");
+        System.out.println("\n╭──────────────────────────────╮");
+        System.out.println("│      Add Sauces & Sides      │");
+        System.out.println("├──────────────────────────────┤");
+        System.out.println("│ 1 - Mayo                     │");
+        System.out.println("│ 2 - Mustard                  │");
+        System.out.println("│ 3 - Ketchup                  │");
+        System.out.println("│ 4 - Ranch                    │");
+        System.out.println("│ 5 - Thousand Islands         │");
+        System.out.println("│ 6 - Vinaigrette              │");
+        System.out.println("│ 7 - Au Jus (Side)            │");
+        System.out.println("│ 8 - Sauce (Side)             │");
+        System.out.println("╰──────────────────────────────╯");
+        System.out.println("Select an option 1-8 or 'x' to finish:");
         while (true) {
             System.out.print("Add sauce/sides: ");
             String input = scanner.nextLine().trim().toLowerCase();
@@ -328,16 +446,28 @@ public class UserInterface {
     // Prompts the user for the drink and size they would like. Based on an array with numbers printed that the user
     // will have to choose that correspond to the index value in the array.
     private void addingDrink() {
-        System.out.println("\n========= Add Drink =========");
         String[] flavors = {"Coke", "Diet Coke", "Sprite", "Root Beer", "Dr Pepper", "Mountain Dew",
                 "Ginger Ale", "Iced Tea", "Fruit Punch", "Celsius", "Sparkling Water", "Water"};
+        System.out.println("\n╭──────────────────────────────╮");
+        System.out.println("│           Add Drink          │");
+        System.out.println("├──────────────────────────────┤");
+        System.out.println("│  1 - Coke                    │");
+        System.out.println("│  2 - Diet Coke               │");
+        System.out.println("│  3 - Sprite                  │");
+        System.out.println("│  4 - Root Beer               │");
+        System.out.println("│  5 - Dr Pepper               │");
+        System.out.println("│  6 - Mountain Dew            │");
+        System.out.println("│  7 - Ginger Ale              │");
+        System.out.println("│  8 - Iced Tea                │");
+        System.out.println("│  9 - Fruit Punch             │");
+        System.out.println("│ 10 - Celsius                 │");
+        System.out.println("│ 11 - Sparkling Water         │");
+        System.out.println("│ 12 - Water                   │");
+        System.out.println("╰──────────────────────────────╯");
+        System.out.print("Select an option 1–12 : ");
         int flavorChoice;
         String flavor;
         while (true) {
-            for (int i = 0; i < flavors.length; i++) {
-                System.out.printf("%d - %s%n", i + 1, flavors[i]);
-            }
-            System.out.print("Select an option (1–12): ");
             if (scanner.hasNextInt()) {
                 flavorChoice = scanner.nextInt();
                 scanner.nextLine();
@@ -352,13 +482,16 @@ public class UserInterface {
                 scanner.nextLine();
             }
         }
+        System.out.println("\n╭──────────────────────────────╮");
+        System.out.println("│      Select Drink Size       │");
+        System.out.println("├──────────────────────────────┤");
+        System.out.println("│ 1 - Small   $2.00            │");
+        System.out.println("│ 2 - Medium  $2.50            │");
+        System.out.println("│ 3 - Large   $3.00            │");
+        System.out.println("╰──────────────────────────────╯");
+        System.out.print("Select an option 1–3: ");
         String size;
         while (true) {
-            System.out.println("\nWhat size would you like?");
-            System.out.println("1) Small - $2.00");
-            System.out.println("2) Medium - $2.50");
-            System.out.println("3) Large - $3.00");
-            System.out.print("Select an option (1–3): ");
             if (scanner.hasNextInt()) {
                 int sizeChoice = scanner.nextInt();
                 scanner.nextLine();
@@ -381,15 +514,24 @@ public class UserInterface {
 
     // Prompts the user what chips they would like to add to the order. Similar to addingDrinks method without the size
     private void addingChips() {
-        System.out.println("\n========= Add Chips =========");
         String[] chipOptions = {"Classic Lay's", "BBQ Lay's", "Doritos Nacho Cheese", "Doritos Cool Ranch",
-                "Cheetos", "Ruffles Cheddar & Sour Cream", "SunChips", "Salt & Vinegar", "Jalapeño Chips"};
-        for (int i = 0; i < chipOptions.length; i++) {
-            System.out.printf("%d - %s%n", i + 1, chipOptions[i]);
-        }
+                "Cheetos", "Ruffles Cheddar", "SunChips", "Salt & Vinegar", "Jalapeño Chips"};
+        System.out.println("\n╭──────────────────────────────╮");
+        System.out.println("│          Add Chips           │");
+        System.out.println("├──────────────────────────────┤");
+        System.out.println("│ 1 - Classic Lay's            │");
+        System.out.println("│ 2 - BBQ Lay's                │");
+        System.out.println("│ 3 - Doritos Nacho Cheese     │");
+        System.out.println("│ 4 - Doritos Cool Ranch       │");
+        System.out.println("│ 5 - Cheetos                  │");
+        System.out.println("│ 6 - Ruffles Cheddar          │");
+        System.out.println("│ 7 - SunChips                 │");
+        System.out.println("│ 8 - Salt & Vinegar           │");
+        System.out.println("│ 9 - Jalapeño Chips           │");
+        System.out.println("╰──────────────────────────────╯");
+        System.out.print("Select an option 1-9 or 'x' to finish: ");
         String type;
         while (true) {
-            System.out.print("Select an option (1–9): ");
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
@@ -406,7 +548,7 @@ public class UserInterface {
         }
         Chips chips = new Chips(type);
         currentOrder.addChips(chips);
-        System.out.println("\n" + chips.getSummary() + "✅ Added to order!");
+        System.out.println("\n" + chips.getSummary() + "\n✅ Added to order!");
     }
 
     // Method to check out the order with confirmation and display it to the user and an option to cancel it instead.

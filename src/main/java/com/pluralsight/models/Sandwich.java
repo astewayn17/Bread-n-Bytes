@@ -104,27 +104,27 @@ public class Sandwich {
         // the name and use an internal ternary to write if the meat is extra or not and then it collects the strings
         // neatly displays them together. Same thing for the cheese and regular toppings.
         if (!meats.isEmpty()) {
-            sb.append("\n   Meats: ");
+            sb.append("\nMeats: ");
             sb.append(meats.stream()
                     .map(meat -> meat.getName() + (meat.isExtra() ? " (Extra)" : ""))
                     .collect(Collectors.joining(", ")));
         } if (!cheeses.isEmpty()) {
-            sb.append("\n   Cheeses: ");
+            sb.append("\nCheeses: ");
             sb.append(cheeses.stream()
                     .map(cheese -> cheese.getName() + (cheese.isExtra() ? " (Extra)" : ""))
                     .collect(Collectors.joining(", ")));
         } if (!regularToppings.isEmpty()) {
-            sb.append("\n   Toppings: ");
+            sb.append("\nToppings: ");
             sb.append(regularToppings.stream()
                     .map(Topping::getName)
                     .collect(Collectors.joining(", ")));
         } if (!sauces.isEmpty()) {
-            sb.append("\n   Sauces: ");
+            sb.append("\nSauces: ");
             sb.append(sauces.stream()
                     .map(Topping::getName)
                     .collect(Collectors.joining(", ")));
         }
-        sb.append(String.format("\n   Price: $%.2f", getMeatNCheesePrice()));
+        sb.append(String.format("\nPrice: $%.2f", getMeatNCheesePrice()));
         return sb.toString();
     }
 

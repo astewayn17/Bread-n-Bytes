@@ -23,7 +23,7 @@ public class Order {
     // Constructor with no parameters since the user won't need to pass anything into it. Will record the current time,
     // the order number will go up every time the user makes a new order and the food are array list types
     public Order() {
-        orderNumber = "Order Number:                  " + (++orderCounter); //
+        orderNumber = "Order Number:                 " + (++orderCounter); //
         orderDateTime = LocalDateTime.now();
         sandwiches = new ArrayList<>();
         drinks = new ArrayList<>();
@@ -64,12 +64,12 @@ public class Order {
                     .mapToObj(i -> String.format("%d. %s", i + 1, sandwiches.get(i).getSummary()))
                     .collect(Collectors.joining("\n")));
         } if (!drinks.isEmpty()) {
-            sb.append("\n\nDRINKS: \n");
+            sb.append("\nDRINKS: \n");
             sb.append(IntStream.range(0, drinks.size())
                     .mapToObj(i -> String.format("%d. %s", i + 1, drinks.get(i).getSummary()))
                     .collect(Collectors.joining("\n")));
         } if (!chips.isEmpty()) {
-            sb.append("\n\nCHIPS: \n");
+            sb.append("\nCHIPS: \n");
             sb.append(IntStream.range(0, chips.size())
                     .mapToObj(i -> String.format("%d. %s", i + 1, chips.get(i).getSummary()))
                     .collect(Collectors.joining("\n")));
