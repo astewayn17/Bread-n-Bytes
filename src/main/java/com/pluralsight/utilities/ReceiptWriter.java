@@ -31,8 +31,8 @@ public class ReceiptWriter {
     public static String receiptFormatter(Order order) {
         // Heading/Top
         StringBuilder sb = new StringBuilder();
-        sb.append("=".repeat(50)).append("\n");
-        sb.append("               Bread 'n Bytes RECEIPT\n");
+        sb.append("                     RECEIPT\n").append("                  Bread 'n Bytes\n");
+        sb.append("     123 N Main St Dallas, Texas 75001-5234\n").append("             Phone: (214) 555-4444\n\n");
         sb.append("=".repeat(50)).append("\n\n");
         // Formats the date printed on the receipt and then the order details below it
         DateTimeFormatter fileNameFormatter2 = DateTimeFormatter.ofPattern("MM/dd/yy h:mm a");
