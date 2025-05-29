@@ -133,26 +133,15 @@ Bread-n-Bytes/
 <table>
   <tr>
     <td align="center" width="500">
-      <img src="https://github.com/astewayn17/Bread-n-Bytes/blob/main/Screenshots/add_cheeses.png" width="300"/><br/>
+      <img src="https://github.com/astewayn17/Bread-n-Bytes/blob/main/Screenshots/add_sauces_and_sides.png" width="300"/><br/>
       <sub><i>Adding Sauces & Sides</i></sub>
     </td>
     <td align="center" width="500">
-      <img src="https://github.com/astewayn17/Bread-n-Bytes/blob/main/Screenshots/add_reg_toppings_and_toasted.png" width="300"/><br/>
+      <img src="https://github.com/astewayn17/Bread-n-Bytes/blob/main/Screenshots/signature_sandwiches.png" width="300"/><br/>
       <sub><i>Signature Sandwich Screen</i></sub>
     </td>
   </tr>
 </table>
-
-<div align="center">
-  <table width="100%">
-    <tr>
-      <td align="center">
-        <img src="https://github.com/astewayn17/Bread-n-Bytes/blob/main/Screenshots/signature_sandwiches.png" width="300"/>
-        <br/>
-        <sub><i>Choosing a Signature Sandwich</i></sub>
-      </td>
-  </table>
-</div>
 
 
 <br/>
