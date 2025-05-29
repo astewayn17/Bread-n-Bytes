@@ -1,0 +1,41 @@
+                     RECEIPT
+                  Bread 'n Bytes
+      123 N Main St Dallas, Texas 75001-5234
+               Phone: (214) 555-4444
+==================================================
+                Order Number: 1583
+              Date: 05/28/25 6:05 PM
+--------------------------------------------------
+SANDWICHES:
+1. 12" Rye Sandwich (Toasted) - $23.65
+  Meats: Steak, Ham, Salami, Roast Beef, Chicken, Bacon, Salami
+  Cheeses: American, Cheddar
+  Toppings: Onions
+  Sauces: Mayo, Au Jus
+2. 12" White Sandwich - $18.55
+  Meats: Steak, Chicken, Ham
+  Cheeses: American, Provolone, Cheddar
+  Toppings: Lettuce, Onions, Tomatoes, Pickles, Guacamole
+  Sauces: Mayo, Mustard, Sauce
+3. 8" Wheat Sandwich (Toasted) - $10.30
+  Cheeses: American, Provolone, American, Cheddar
+  Toppings: Peppers, Onions
+  Sauces: Sauce
+DRINKS:
+1. Small Water - $2.00
+2. Large Iced Tea - $3.00
+CHIPS:
+1. Salt & Vinegar - $1.50
+2. Ruffles Cheddar - $1.50
+3. Doritos Cool Ranch - $1.50
+--------------------------------------------------
+          SUBTOTAL:               $62.00
+          TAXABLE:                $62.00
+          TAX (8.25%):            $5.12
+          TOTAL:                  $67.12
+
+          Paid Visa 1234          $67.12
+                  Items Sold: 8
+==================================================
+      Thank you for choosing Bread 'n Bytes!
+               Visit us again soon!

@@ -173,12 +173,12 @@ public class UserInterface {
                 System.out.println("│ 2) Philly Cheese Steak       │");
                 System.out.println("│ 3) Tex-Mex Wrap              │");
                 System.out.println("│ 4) Veggie Crunch             │");
-                System.out.println("│ ?) Admin (Secret Password)   │");
+                System.out.println("│ ?) Secret (Admin Password)   │");
                 System.out.println("│ 0) Cancel                    │");
                 System.out.println("╰──────────────────────────────╯");
                 System.out.print("Select an option (0–4 or '?'): ");
             } else {
-                System.out.println("\n༺══════༻ Secret  Menu ༺══════༻");
+                System.out.println("\n༺═══════  Secret Menu  ═══════༻");
                 System.out.println("│     Signature Sandwiches     │");
                 System.out.println("├──────────────────────────────┤");
                 System.out.println("│ 1) BLT                       │");
@@ -397,7 +397,7 @@ public class UserInterface {
     private List<Topping> whatRegularToppings() {
         List<Topping> toppings = new ArrayList<>();
         System.out.println("\n╭──────────────────────────────╮");
-        System.out.println("│    Add Regular Toppings      │");
+        System.out.println("│     Add Regular Toppings     │");
         System.out.println("├──────────────────────────────┤");
         System.out.println("│ 1 - Lettuce                  │");
         System.out.println("│ 2 - Peppers                  │");
@@ -618,7 +618,7 @@ public class UserInterface {
             ReceiptWriter.saveReceipt(currentOrder);
             System.out.println("\n✅ Order confirmed! Thank you!\n");
         } else {
-            System.out.println("\n❌ Order cancelled.");
+            System.out.println("\n❌ Order cancelled.\n");
         }
         currentOrder = null;
     }

@@ -17,7 +17,6 @@ public class MOAS extends Sandwich {
         addCheese(Topping.cheddar);
         addRegularTopping(Topping.lettuce);
         addRegularTopping(Topping.onions);
-        addRegularTopping(Topping.tomatoes);
         addRegularTopping(Topping.pickles);
         addRegularTopping(Topping.guacamole);
         addSauce(Topping.mayo);

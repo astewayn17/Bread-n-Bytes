@@ -12,7 +12,6 @@ public class TheButchersSecret extends Sandwich {
         setToasted(false);
         addMeat(Topping.steak);
         addMeat(Topping.ham);
-        addMeat(Topping.salami);
         addMeat(Topping.roastBeef);
         addMeat(Topping.chicken);
         addMeat(Topping.bacon);
